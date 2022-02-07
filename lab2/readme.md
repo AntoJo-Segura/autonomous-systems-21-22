@@ -4,7 +4,7 @@
 # Getting Started
 
 The fastest way to proceed for this lab session is:
-1. Install any SAT solver, such as _Minisat_, _Glucose_, or one of the solvers from a [recent competition](http://www.satcompetition.org/). We provide you with some code that works with [Minisat](http://minisat.se/), but you are free to work with a different solver.
+1. Install any SAT solver, such as _Minisat_, _Glucose_, or one of the solvers from a [recent competition](http://www.satcompetition.org/). We provide you with some code that works with [Minisat](http://minisat.se/), but you are free to choose a different solver.
 1. Write a script that generates the propositional formula describing the Sudoku instance you are dealing with, in CNF.
 1. Print your representation of the formula into a file that follows the
    [DIMACS CNF format](https://people.sc.fsu.edu/~jburkardt/data/cnf/cnf.html), the standard
