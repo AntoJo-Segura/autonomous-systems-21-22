@@ -34,6 +34,7 @@ propositional theory generator.
 Clone this repository:
 
     git clone https://github.com/AOccLib/autonomous-systems-21-22
+    cd autonomous-systems-21-22/lab2
   
 You will see some Python code to get you started. 
 It basically will handle command-line arguments for you, parse Sudoku boards
