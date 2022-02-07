@@ -4,8 +4,7 @@
 # Getting Started
 
 The fastest way to proceed for this lab session is:
-1. Install any SAT solver e.g. from some [recent competition](http://www.satcompetition.org/).
-   Other simple alternatives could be the _Glucose_ or the _Minisat_ solvers.
+1. Install any SAT solver, such as _Minisat_, _Glucose_, or one of the solvers from a [recent competition](http://www.satcompetition.org/).
 1. Write a script that generates the propositional formula describing the Sudoku instance you are dealing with, in CNF.
 1. Print your representation of the formula into a file that follows the
    [DIMACS CNF format](https://people.sc.fsu.edu/~jburkardt/data/cnf/cnf.html), the standard
@@ -34,8 +33,7 @@ propositional theory generator.
 
 Clone this repository:
 
-    git clone https://github.com/aig-upf/miis-autonomous-systems-20-21.git
-    cd miis-autonomous-systems-20-21/lab2
+    git clone https://github.com/AOccLib/autonomous-systems-21-22
   
 You will see some Python code to get you started. 
 It basically will handle command-line arguments for you, parse Sudoku boards
@@ -49,8 +47,7 @@ but it might help you focus on the interesting parts.
 
 # A walkthrough of the exercise
 
-To be more explicity about what needs to be done for the _programming_ exercises of this submission
-(mostly exercises (b) and (c)):  
+To be more explicity about what needs to be done for the _programming_ exercises of this submission:  
 
 * To start programming exercise (b), you need to have an idea of how to "model" (cast, transform)
 any given Sudoku instance as a (CNF) SAT problem. You should have done this in exercise (a).
