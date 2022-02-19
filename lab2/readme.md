@@ -41,6 +41,8 @@ Clone this repository:
     git clone https://github.com/AOccLib/autonomous-systems-21-22
     cd autonomous-systems-21-22/lab2
   
+You can fork and clone from your onw repository if you want to track your changes and don't modify original repository.
+
 You will see some Python code to get you started. 
 It basically will handle command-line arguments for you, parse Sudoku boards
 into a more meaningful matrix-like representation, write files in the 
