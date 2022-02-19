@@ -25,6 +25,11 @@ with:
 
     sudo apt install minisat
 
+
+Under Mac, you can install it with:
+
+    sudo brew install minisat
+
 # Getting started with the coding
 
 In the interest of time, we provide you with some code skeleton so that
