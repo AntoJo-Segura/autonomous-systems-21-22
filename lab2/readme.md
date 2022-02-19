@@ -30,6 +30,10 @@ Under Mac, you can install it with:
 
     sudo brew install minisat
 
+You can use CNF sample to check minisat
+
+    minisat sample_cnf.cnf
+
 # Getting started with the coding
 
 In the interest of time, we provide you with some code skeleton so that
