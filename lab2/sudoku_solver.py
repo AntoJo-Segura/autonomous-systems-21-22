@@ -59,8 +59,9 @@ for key,is_sol in var_solution.items():
 assert(solution == '967235418438791256125684973296853417478126359531794268396457218857129643214836759')     
 
 #solver encapsulation
-def solve(sudoku: str):
-    c = c1 + c2 + c3 + c4 + c5 + given_constraints(sudoku)
+def solve(sudoku: str, c = None):
+    if c == None:
+        c = c1 + c2 + c3 + c4 + c5 + given_constraints(sudoku)
     input_filename = 'lab2/input.cnf'
     utils.save_dimacs_cnf(range(0, rcv(9,9,9)), c, input_filename, False)
     output_SAT = utils.solve(input_filename, False)
@@ -75,7 +76,50 @@ def solve(sudoku: str):
 
 assert(solve(sudoku_sample) == '967235418438791256125684973296853417478126359531794268396457218857129643214836759')     
 
+def rcv(row, column, value, max_row = 9, max_column = 9):
+    return (row-1)* max_row * max_column + (column-1) * 9 + (value-1) + 1
+    
+# string_pos starts at 0; rows and column starts at 1
+def str_to_rcv(string_pos: int, character: int, max_col = 9):
+    value = character
+    col = string_pos % max_col
+    row = int((string_pos - col) / max_col) +1
+    return [row, col + 1, value]
+
+assert(str_to_rcv(7,1) == [1, 8, 1]) # first item of sample
+assert(str_to_rcv(9,4) == [2, 1, 4]) # second item of sample
+
+def check_sol(c):
+    input_filename = 'lab2/input.cnf'
+    utils.save_dimacs_cnf(range(0, rcv(9,9,9)), c, input_filename, False)
+    output_SAT = utils.solve(input_filename, False)
+    var_solution = dict(output_SAT[1])
+    solution = ''
+    for key,is_sol in var_solution.items():
+        if is_sol :
+            row, col, val = rcv_inv(key)
+            solution += str(val)
+    print(sudoku_sample)
+    print(solution)
+    print('')
+    return solution
 
 
+def count_solution(sudoku: str, is_test = False, max_iter = 1e4):
+    
+    c = c1 + c2 + c3 + c4 + c5 + given_constraints(sudoku) 
+    count = 0
 
+    while count < max_iter:
+        new_sol = solve(sudoku, c)
+        rcv_sol = list(map( lambda x: str_to_rcv(x[0], int(x[1]) ), enumerate(new_sol) ))
+        formated_sol = list(map( lambda x: - rcv(x[0],x[1],x[2]) , rcv_sol ))
+        c.append(formated_sol)
 
+        if is_test: check_sol(c)
+        count += 1
+
+    print(count)
+    return count
+
+count_solution(sudoku_sample, True)
