@@ -31,6 +31,11 @@ assert(only_one_value()[8]==[-2, -3])
 
 def filled_row(max_row = 9, max_column = 9):
     clauses = []
-
+    for r in range(1, max_row + 1): 
+        for v in range(1, 9 + 1):
+            clauses.append(
+                list(map(lambda c: rcv(r,c,v), range(1,max_column +1)))
+            )
     return clauses
 
+assert(filled_row()[0]==[1, 10, 19, 28, 37, 46, 55, 64, 73])
