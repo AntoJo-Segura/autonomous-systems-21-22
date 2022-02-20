@@ -6,4 +6,5 @@ sudoku_sample = ['.......1.','4........','.2.......','....5.4.7','..8...3..','..
 c1 = at_least_one_value
 c2 = only_one_value
 c3 = filled_row
+c4 = filled_column
 
