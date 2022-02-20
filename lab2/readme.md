@@ -110,4 +110,17 @@ You can call minisat, or whatever SAT solver you prefer, on this file:
 call a SAT solver (e.g. as a Python subprocess), read the satisfying assignment found by the solver, and
 "translate" it back to the realm of Sudoku, so that you have a solved board.
 
+# Execution
+
+If you want to run this program you have to run the script solve_sudoku.py and then insert a sudoku to solve.
+
+    solve_sudoku.py
+
+Then paste:
+
+    .......1.4.........2...........5.4.7..8...3....1.9....3..4..2...5.1........8.6...
+
+It should return:
+
+    967235418438791256125684973296853417478126359531794268396457218857129643214836759    This is a solution
 
