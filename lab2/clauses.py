@@ -1,6 +1,6 @@
 # map row, column and value triplets to a scalar dimension value   
 def rcv(row, column, value, max_row = 9, max_column = 9):
-    return (row-1)* max_row * max_row + (column-1) * max_column + (value-1) + 1
+    return (row-1)* max_row * max_column + (column-1) * 9 + (value-1) + 1
 
 assert(rcv(1,1,9) == 9)
 assert(rcv(1,2,6) == 15)
@@ -67,6 +67,9 @@ def filled_grid( grid_row = 3, grid_col = 3):
 
 assert(filled_grid()[0] == [1, 10, 19, 82, 91, 100, 163, 172, 181]) 
 assert(filled_grid()[1] == [28, 37, 46, 109, 118, 127, 190, 199, 208]) 
+
+
+
 
 
 
