@@ -118,6 +118,7 @@ def count_solution(sudoku: str, is_test = False, max_iter = 1e4):
 
         if is_test: check_sol(c)
         count += 1
+        print('Number of found solutions: ' + count)
 
     print(count)
     return count
