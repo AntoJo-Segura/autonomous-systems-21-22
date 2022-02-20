@@ -50,3 +50,24 @@ def filled_column(max_row = 9, max_column = 9):
     return clauses
 
 assert(filled_column()[0] == [1, 10, 19, 28, 37, 46, 55, 64, 73])
+
+
+def filled_grid( grid_row = 3, grid_col = 3):
+    clauses = []
+    for v in range(1, 9+1):
+        for r in range(0, grid_row):
+            for c in range(0, grid_col):
+                clauses.append([
+                    rcv(r * grid_row + gr, c * grid_col + gc, v)
+                    for gr in range(1,grid_row+1) 
+                    for gc in range(1, grid_col + 1)
+                ])
+    return clauses
+
+
+assert(filled_grid()[0] == [1, 10, 19, 82, 91, 100, 163, 172, 181]) 
+assert(filled_grid()[1] == [28, 37, 46, 109, 118, 127, 190, 199, 208]) 
+
+
+
+
