@@ -1,4 +1,4 @@
-from lab2.sudoku_solver import count_solution
+from sudoku_solver import count_solution
 from sudoku_solver import solve
 
 to_solve = input()
