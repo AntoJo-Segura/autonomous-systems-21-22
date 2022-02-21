@@ -123,4 +123,4 @@ def count_solution(sudoku: str, is_test = False, max_iter = 1e4):
     print(count)
     return count
 
-count_solution(sudoku_sample, True)
+# count_solution(sudoku_sample, True)
