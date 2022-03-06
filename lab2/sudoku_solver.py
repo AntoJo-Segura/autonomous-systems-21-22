@@ -89,7 +89,7 @@ def str_to_rcv(string_pos: int, character: int, max_col = 9):
 assert(str_to_rcv(7,1) == [1, 8, 1]) # first item of sample
 assert(str_to_rcv(9,4) == [2, 1, 4]) # second item of sample
 
-def check_sol(c):
+def check_sol(c, sudoku = sudoku_sample):
     input_filename = 'lab2/input.cnf'
     utils.save_dimacs_cnf(range(0, rcv(9,9,9)), c, input_filename, False)
     output_SAT = utils.solve(input_filename, False)
@@ -99,7 +99,7 @@ def check_sol(c):
         if is_sol :
             row, col, val = rcv_inv(key)
             solution += str(val)
-    print(sudoku_sample)
+    print(sudoku)
     print(solution)
     print('')
     return solution
@@ -114,13 +114,17 @@ def count_solution(sudoku: str, is_test = False, max_iter = 1e4):
         new_sol = solve(sudoku, c)
         rcv_sol = list(map( lambda x: str_to_rcv(x[0], int(x[1]) ), enumerate(new_sol) ))
         formated_sol = list(map( lambda x: - rcv(x[0],x[1],x[2]) , rcv_sol ))
-        c.append(formated_sol)
+        if len(formated_sol) == 0:
+            print('Final number of solutions: '+ str(count))
+            break
+        else:
+            c.append(formated_sol)
 
-        if is_test: check_sol(c)
+        if is_test: check_sol(c, sudoku)
         count += 1
         print('Number of found solutions: ' + str(count))
 
-    print(count)
     return count
 
-# count_solution(sudoku_sample, True)
+sudoku_sample2 = '.....54..........8.8.19....3....1.6........34....6817.2.4...6.39......2.53.2.....'
+# count_solution(sudoku_sample2, True)
