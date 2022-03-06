@@ -56,7 +56,7 @@ for key,is_sol in var_solution.items():
         row, col, val = rcv_inv(key)
         solution += str(val)
 
-assert(solution == '967235418438791256125684973296853417478126359531794268396457218857129643214836759')     
+assert(solution == '693784512487512936125963874932651487568247391741398625319475268856129743274836159')     
 
 #solver encapsulation
 def solve(sudoku: str, c = None):
@@ -74,7 +74,7 @@ def solve(sudoku: str, c = None):
 
     return solution 
 
-assert(solve(sudoku_sample) == '967235418438791256125684973296853417478126359531794268396457218857129643214836759')     
+assert(solve(sudoku_sample) == '693784512487512936125963874932651487568247391741398625319475268856129743274836159')     
 
 def rcv(row, column, value, max_row = 9, max_column = 9):
     return (row-1)* max_row * max_column + (column-1) * 9 + (value-1) + 1
