@@ -42,14 +42,14 @@ assert(filled_row()[0]==[1, 10, 19, 28, 37, 46, 55, 64, 73])
 
 def filled_column(max_row = 9, max_column = 9):
     clauses = []
-    for r in range(1, max_column + 1): 
+    for c in range(1, max_column + 1): 
         for v in range(1, 9 + 1):
             clauses.append(
-                list(map(lambda c: rcv(r,c,v), range(1,max_row +1)))
+                list(map(lambda r: rcv(r,c,v), range(1,max_row +1)))
             )
     return clauses
 
-assert(filled_column()[0] == [1, 10, 19, 28, 37, 46, 55, 64, 73])
+assert(filled_column()[0] == [1, 82, 163, 244, 325, 406, 487, 568, 649])
 
 
 def filled_grid( grid_row = 3, grid_col = 3):
