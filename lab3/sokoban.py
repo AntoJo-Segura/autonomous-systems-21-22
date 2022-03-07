@@ -22,8 +22,11 @@ class SokobanGame(object):
         self.walls = set()
         self.boxes = set()
         self.goals = set()
+        self.positions = set()
+        self.gaps = set()
         for i, line in enumerate(lines, 0):
             for j, char in enumerate(line, 0):
+                self.positions.add((i, j))
                 if char == '#':  # Wall
                     self.walls.add((i, j))
                 elif char == '@':  # Player
@@ -41,7 +44,7 @@ class SokobanGame(object):
                 elif char == '.':  # Goal square
                     self.goals.add((i, j))
                 elif char == ' ':  # Space
-                    pass  # No need to do anything
+                    self.gaps.add((i,j))
                 else:
                     raise ValueError(f'Unknown character "{char}"')
 
@@ -62,6 +65,7 @@ def main(argv):
     args = parse_arguments(argv)
     with open(args.i, 'r') as file:
         board = SokobanGame(file.read().rstrip('\n'))
+
 
     # TODO - Some of the things that you need to do:
     #  1. (Previously) Have a domain.pddl file somewhere in disk that represents the Sokoban actions and predicates.
