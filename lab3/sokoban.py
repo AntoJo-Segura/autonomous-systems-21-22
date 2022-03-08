@@ -113,13 +113,20 @@ class SokobanGame(object):
         coord = self.player
         right_pos = (coord[0],coord[1]+1)
         if ( right_pos in self.gaps or right_pos in self.boxes):#right move
-            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(coord[0])+'-'+str(coord[1]+1)+' dir-right)']
-        if (coord[0],coord[1]-1) in self.gaps or (coord[0],coord[1]-1) in self.boxes :#left move
-            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(coord[0])+'-'+str(coord[1]-1)+' dir-left)']
-        if (coord[0]+1,coord[1]) in self.gaps or (coord[0]+1,coord[1]) in self.boxes :#up move
-            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(coord[0]+1)+'-'+str(coord[1])+' dir-up)']
-        if (coord[0]-1,coord[1]) in self.gaps or (coord[0]-1,coord[1]) in self.boxes :#down move
-            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(coord[0]-1)+'-'+str(coord[1])+' dir-down)']        
+            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(right_pos[0])+'-'+str(right_pos[1])+' dir-right)']
+
+        left_pos = (coord[0],coord[1]-1)
+        if left_pos in self.gaps or left_pos in self.boxes :#left move
+            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(left_pos[0])+'-'+str(left_pos[1])+' dir-left)']
+
+        up_pos = (coord[0]+1,coord[1])
+        if up_pos in self.gaps or up_pos in self.boxes :#up move
+            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(up_pos[0])+'-'+str(up_pos[1])+' dir-up)']
+
+        down_pos =  (coord[0]-1,coord[1])   
+        if down_pos in self.gaps or down_pos in self.boxes :#down move
+            pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(down_pos[0])+'-'+str(down_pos[1])+' dir-down)']    
+                
         pddl +=['  (direction-move pos-2-4 pos-2-5 dir-right)']
         pddl += ['  )']
         pddl += ['  (:goal (and ']
