@@ -2,6 +2,7 @@
 
 import argparse
 import sys
+import subprocess as sp
 
 
 def parse_arguments(argv):
@@ -24,6 +25,7 @@ class SokobanGame(object):
         self.goals = set()
         self.positions = set()
         self.gaps = set()
+        self.pddl = ''
         for i, line in enumerate(lines, 0):
             for j, char in enumerate(line, 0):
                 self.positions.add((i, j))
@@ -77,7 +79,7 @@ class SokobanGame(object):
             pddl += ['  box-0'+ str(i+1)+' - box']
         
         for coord in self.positions:
-            pddl += [' pos-'+ str(coord[0]) +'-'+ str(coord[1]) +' - position']
+            pddl += ['  pos-'+ str(coord[0]) +'-'+ str(coord[1]) +' - position']
         pddl += ['  )']
         pddl += ['  (:init ']
         for coord in self.goals:
@@ -87,7 +89,7 @@ class SokobanGame(object):
 
         pddl += ['  (at player-01 pos-' + str(self.player[0]) +'-' + str(self.player[1]) +')']
         pddl += ['  (is-transported teletransport)']
-        for coord in self.gaps or coord in self.boxes: #'or' term asked to Andres
+        for coord in self.gaps:
             pddl += ['  (transport-position pos-'+ str(coord[0]) + '-'+ str(coord[1]) +')']
 
         for coord in self.positions:
@@ -125,13 +127,33 @@ class SokobanGame(object):
             pddl += ['  (at-goal box-0'+str(i+1)+'))']
         pddl += ['  )']
         pddl += [')']
-        return '\n'.join(pddl) 
+        self.pddl = '\n'.join(pddl) 
+        return self.pddl
+
+    def save_pddl(self, output_file = 'instance_problem.pddl'):
+        with open(output_file,'w') as file:
+            file.write(self.pddl)
+        return output_file
+
+    def call_downward(self):
+        instance = 'instance_problem.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
+        output_file = 'solution_output.txt'
+        downward_path = './downward/fast-downward.py'
+        cmd = 'python '+ downward_path +' --overall-time-limit 60 --alias seq-sat-lama-2011 --plan-file '
+        cmd += output_file+' domain_sokoban_2a.pddl '+ instance + ''
+        print(cmd)
+        print(sp.run(cmd, shell = True))
+        return 1
 
 def main(argv):
     args = parse_arguments(argv)
     with open(args.i, 'r') as file:
         board = SokobanGame(file.read().rstrip('\n'))
-    print(board.get_pddl())
+    
+    board.get_pddl()
+    board.save_pddl()
+    board.call_downward()
+    # print(board.pddl)
 
     # TODO - Some of the things that you need to do:
     #  1. (Previously) Have a domain.pddl file somewhere in disk that represents the Sokoban actions and predicates.
