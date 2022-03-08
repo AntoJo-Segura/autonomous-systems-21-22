@@ -62,7 +62,7 @@ class SokobanGame(object):
         """ Whether the given coordinate is a goal location. """
         return (x, y) in self.goals
 
-    def get_pddl(self):
+    def generate_pddl(self):
         pddl  = []
         name = 'simpleone'
         pddl += ['(define (problem '+ name +')']
@@ -140,7 +140,7 @@ class SokobanGame(object):
         return output_file
 
     def call_downward(self):
-        instance = 'instance_problem.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
+        instance = 'problem_sokoban1.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
         output_file = 'solution_output.txt'
         downward_path = './downward/fast-downward.py'
         cmd = 'python '+ downward_path +' --overall-time-limit 60 --alias seq-sat-lama-2011 --plan-file '
@@ -149,15 +149,22 @@ class SokobanGame(object):
         print(sp.run(cmd, shell = True))
         return 1
 
+    def print_results(self):
+        output_file = 'solution_output.txt.1'
+        with open(output_file) as f:
+            lines = f.readlines()
+        print(''.join(lines))
+        return 1
+
 def main(argv):
     args = parse_arguments(argv)
     with open(args.i, 'r') as file:
         board = SokobanGame(file.read().rstrip('\n'))
     
-    board.get_pddl()
+    board.generate_pddl()
     board.save_pddl()
     board.call_downward()
-    # print(board.pddl)
+    board.print_results()
 
     # TODO - Some of the things that you need to do:
     #  1. (Previously) Have a domain.pddl file somewhere in disk that represents the Sokoban actions and predicates.
