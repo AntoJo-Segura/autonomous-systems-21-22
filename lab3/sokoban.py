@@ -182,7 +182,7 @@ def main(argv):
     board.generate_pddl()
     board.save_pddl()
     print('gaps: '+ str(len(board.gaps)))
-    print('downward must be at relative path:' + board.downward_path)
+    print('downward folder must be at relative path:' + board.downward_path)
     board.call_downward()
     board.print_results()
 
