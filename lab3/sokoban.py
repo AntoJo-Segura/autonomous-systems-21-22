@@ -158,7 +158,9 @@ class SokobanGame(object):
         instance = 'instance_problem.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
         output_file = 'solution_output.txt'
         downward_path = './downward/fast-downward.py'
-        cmd = 'python '+ downward_path +' --overall-time-limit 60 --alias seq-sat-lama-2011 --plan-file '
+        planner = 'seq-sat-lama-2011'
+        timeout = str(120)
+        cmd = 'python '+ downward_path +' --overall-time-limit '+ timeout + ' --alias '+ planner +' --plan-file '
         cmd += output_file+' domain_sokoban_2a.pddl '+ instance + ''
         print(cmd)
         print(sp.run(cmd, shell = True))
