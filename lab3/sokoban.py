@@ -112,6 +112,9 @@ class SokobanGame(object):
         for coord in self.goals:
             pddl += self.move_pddl(coord)
 
+        for coord in self.boxes:
+            pddl += self.move_pddl(coord)
+
         pddl += self.move_pddl(self.player)
 
         pddl += ['  )']
