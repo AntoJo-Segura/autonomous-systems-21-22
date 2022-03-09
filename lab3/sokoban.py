@@ -85,7 +85,7 @@ class SokobanGame(object):
         for coord in self.goals:
             pddl += ['  (is-goal pos-'+ str(coord[0]) +'-'+ str(coord[1]) +')']
         for i,coord in enumerate(self.boxes):
-            pddl += ['  (at box-0'+ str(i)+' pos-' + str(coord[0]) +'-'+ str(coord[1]) +')']
+            pddl += ['  (at box-0'+ str(i+1)+' pos-' + str(coord[0]) +'-'+ str(coord[1]) +')']
 
         pddl += ['  (at player-01 pos-' + str(self.player[0]) +'-' + str(self.player[1]) +')']
         pddl += ['  (is-transported teletransport)']
