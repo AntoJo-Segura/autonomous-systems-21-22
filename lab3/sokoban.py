@@ -4,6 +4,8 @@ import argparse
 import sys
 import subprocess as sp
 
+from sortedcollections import OrderedSet
+
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser(description='Solve Sudoku problems.')
@@ -20,11 +22,11 @@ class SokobanGame(object):
         lines = string.split('\n')
         self.h, self.w = len(lines), max(len(x) for x in lines)
         self.player = None
-        self.walls = set()
-        self.boxes = set()
-        self.goals = set()
-        self.positions = set()
-        self.gaps = set()
+        self.walls = OrderedSet()
+        self.boxes = OrderedSet()
+        self.goals = OrderedSet()
+        self.positions = OrderedSet()
+        self.gaps = OrderedSet()
         self.pddl = ''
         for i, line in enumerate(lines, 0):
             for j, char in enumerate(line, 0):
