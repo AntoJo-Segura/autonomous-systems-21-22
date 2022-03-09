@@ -164,7 +164,7 @@ class SokobanGame(object):
     def call_downward(self):
         cmd = 'python '+ self.downward_path +' --overall-time-limit '+ self.timeout + ' --alias '+ self.planner +' --plan-file '
         cmd += self.output_file+' domain_sokoban_2a.pddl '+ self.instance + ''
-        # print(sp.run(cmd, shell = True))
+        print(sp.run(cmd, shell = True))
         return cmd
 
     def print_results(self):
@@ -185,12 +185,6 @@ def main(argv):
     print('downward folder must be at relative path:' + board.downward_path)
     board.call_downward()
     board.print_results()
-
-    # TODO - Some of the things that you need to do:
-    #  1. (Previously) Have a domain.pddl file somewhere in disk that represents the Sokoban actions and predicates.
-    #  2. Generate an instance.pddl file from the given board, and save it to disk.
-    #  3. Invoke some classical planner to solve the generated instance.
-    #  3. Check the output and print the plan into the screen in some readable form.
 
 
 if __name__ == "__main__":
