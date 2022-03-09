@@ -114,7 +114,6 @@ class SokobanGame(object):
 
         pddl += self.move_pddl(self.player)
 
-        pddl +=['  (direction-move pos-2-4 pos-2-5 dir-right)']
         pddl += ['  )']
         pddl += ['  (:goal (and ']
         for i,coord in enumerate(self.boxes):
