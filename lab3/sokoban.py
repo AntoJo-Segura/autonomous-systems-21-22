@@ -139,11 +139,11 @@ class SokobanGame(object):
         if left_pos in self.gaps or left_pos in self.boxes or left_pos in self.goals:#left move
             pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(left_pos[0])+'-'+str(left_pos[1])+' dir-left)']
 
-        up_pos = (coord[0]+1,coord[1])
+        up_pos = (coord[0]-1,coord[1])
         if up_pos in self.gaps or up_pos in self.boxes or up_pos in self.goals:#up move
             pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(up_pos[0])+'-'+str(up_pos[1])+' dir-up)']
 
-        down_pos =  (coord[0]-1,coord[1])   
+        down_pos =  (coord[0]+1,coord[1])   
         if down_pos in self.gaps or down_pos in self.boxes or down_pos in self.goals:#down move
             pddl +=['  (direction-move pos-'+str(coord[0])+'-'+str(coord[1])+' pos-'+str(down_pos[0])+'-'+str(down_pos[1])+' dir-down)']  
 
