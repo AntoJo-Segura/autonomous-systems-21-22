@@ -122,8 +122,8 @@ class SokobanGame(object):
         pddl += ['  )']
         pddl += ['  (:goal (and ']
         for i,coord in enumerate(self.boxes):
-            pddl += ['  (at-goal box-0'+str(i+1)+'))']
-        pddl += ['  )']
+            pddl += ['  (at-goal box-0'+str(i+1)+')']
+        pddl += ['  ))']
         pddl += [')']
         self.pddl = '\n'.join(pddl) 
         print(self.pddl)
