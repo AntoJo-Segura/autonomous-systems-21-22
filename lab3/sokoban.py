@@ -91,6 +91,9 @@ class SokobanGame(object):
         pddl += ['  (is-transported teletransport)']
         for coord in self.gaps:
             pddl += ['  (transport-position pos-'+ str(coord[0]) + '-'+ str(coord[1]) +')']
+        for coord in self.goals:
+            pddl += ['  (transport-position pos-'+ str(coord[0]) + '-'+ str(coord[1]) +')']
+
 
         for coord in self.positions:
             if coord not in self.goals:
@@ -98,8 +101,15 @@ class SokobanGame(object):
 
         for coord in self.gaps:
             pddl += ['  (empty pos-'+ str(coord[0]) + '-'+ str(coord[1]) +')']
+        
+        for coord in self.goals:
+            pddl += ['  (empty pos-'+ str(coord[0]) + '-'+ str(coord[1]) +')']
+
 
         for coord in self.gaps:
+            pddl += self.move_pddl(coord)
+        
+        for coord in self.goals:
             pddl += self.move_pddl(coord)
 
         pddl += self.move_pddl(self.player)
@@ -112,6 +122,7 @@ class SokobanGame(object):
         pddl += ['  )']
         pddl += [')']
         self.pddl = '\n'.join(pddl) 
+        print(self.pddl)
         return self.pddl
 
     def move_pddl(self, coord):
@@ -140,7 +151,7 @@ class SokobanGame(object):
         return output_file
 
     def call_downward(self):
-        instance = 'problem_sokoban1.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
+        instance = 'instance_problem.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
         output_file = 'solution_output.txt'
         downward_path = './downward/fast-downward.py'
         cmd = 'python '+ downward_path +' --overall-time-limit 60 --alias seq-sat-lama-2011 --plan-file '
@@ -160,10 +171,11 @@ def main(argv):
     args = parse_arguments(argv)
     with open(args.i, 'r') as file:
         board = SokobanGame(file.read().rstrip('\n'))
-    
+    print(len(board.gaps))
     board.generate_pddl()
     board.save_pddl()
     board.call_downward()
+    print('gaps: '+ str(len(board.gaps)))
     board.print_results()
 
     # TODO - Some of the things that you need to do:
