@@ -19,6 +19,13 @@ class SokobanGame(object):
         """ Create a Sokoban game object from a string representation such as the one defined in
             http://sokobano.de/wiki/index.php?title=Level_format
         """
+
+        self.instance = 'instance_problem.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
+        self.output_file = 'solution_output.txt'
+        self.downward_path = './downward/fast-downward.py'
+        self.planner = 'seq-sat-lama-2011'
+        self.timeout = str(500)
+
         lines = string.split('\n')
         self.h, self.w = len(lines), max(len(x) for x in lines)
         self.player = None
@@ -155,16 +162,10 @@ class SokobanGame(object):
         return output_file
 
     def call_downward(self):
-        instance = 'instance_problem.pddl'#'problem_sokoban1.pddl' #'instance_problem.pddl'
-        output_file = 'solution_output.txt'
-        downward_path = './downward/fast-downward.py'
-        planner = 'seq-sat-lama-2011'
-        timeout = str(120)
-        cmd = 'python '+ downward_path +' --overall-time-limit '+ timeout + ' --alias '+ planner +' --plan-file '
-        cmd += output_file+' domain_sokoban_2a.pddl '+ instance + ''
-        print(cmd)
-        print(sp.run(cmd, shell = True))
-        return 1
+        cmd = 'python '+ self.downward_path +' --overall-time-limit '+ self.timeout + ' --alias '+ self.planner +' --plan-file '
+        cmd += self.output_file+' domain_sokoban_2a.pddl '+ self.instance + ''
+        # print(sp.run(cmd, shell = True))
+        return cmd
 
     def print_results(self):
         output_file = 'solution_output.txt.1'
@@ -177,11 +178,12 @@ def main(argv):
     args = parse_arguments(argv)
     with open(args.i, 'r') as file:
         board = SokobanGame(file.read().rstrip('\n'))
-    print(len(board.gaps))
+    
     board.generate_pddl()
     board.save_pddl()
-    board.call_downward()
     print('gaps: '+ str(len(board.gaps)))
+    print('downward must be at relative path:' + board.downward_path)
+    board.call_downward()
     board.print_results()
 
     # TODO - Some of the things that you need to do:
